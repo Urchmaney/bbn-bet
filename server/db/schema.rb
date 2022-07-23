@@ -16,8 +16,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_23_061041) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "username", null: false
+    t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["username"], name: "index_accounts_on_username", unique: true
   end
 
 end
