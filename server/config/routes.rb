@@ -7,5 +7,7 @@ Rails.application.routes.draw do
     collection do
       post :login
     end
+    
+    resources :bets, only: [:create]
   end
 end
