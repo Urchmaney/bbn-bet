@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_24_085152) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_25_200415) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -36,6 +36,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_24_085152) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bet_id"], name: "index_bet_events_on_bet_id"
+  end
+
+  create_table "bet_option_picks", force: :cascade do |t|
+    t.bigint "account_id"
+    t.bigint "bet_event_id"
+    t.bigint "bet_id"
+    t.bigint "bet_event_option_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id", "bet_event_id", "bet_id", "bet_event_option_id"], name: "index_account_bet_option_pick", unique: true
+    t.index ["account_id"], name: "index_bet_option_picks_on_account_id"
+    t.index ["bet_event_id"], name: "index_bet_option_picks_on_bet_event_id"
+    t.index ["bet_event_option_id"], name: "index_bet_option_picks_on_bet_event_option_id"
+    t.index ["bet_id"], name: "index_bet_option_picks_on_bet_id"
   end
 
   create_table "bets", force: :cascade do |t|
