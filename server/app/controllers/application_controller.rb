@@ -1,9 +1,8 @@
 class ApplicationController < ActionController::API
-
   private
 
   def load_account
-    account_id = decode_auth_token(params[:auth_token])[:account_id]
+    account_id = decode_auth_token(request.headers['Authorization'].split.last)['account_id']
     @account = Account.find(account_id)
   end
 
