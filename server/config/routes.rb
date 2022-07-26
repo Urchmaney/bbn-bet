@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       post :login
     end
     
-    resources :bets, only: [:create]
+    resources :bets, only: [:create] do
+      resources :bet_option_picks, only: [:create]
+    end
   end
 end
