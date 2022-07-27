@@ -1,12 +1,12 @@
 class BetOptionPicksController < ApplicationController
-  before_action :load_account, :load_bet_event
+  before_action :load_account, :load_bet
 
   def create
-    pick = @account.bet_option_picks.new(bet_option_pick_params.merge(@bet_event))
+    pick = @account.bet_option_picks.new(bet_option_pick_params.merge({ bet: @bet }))
     if pick.save
       render json: { account: @account }, status: :ok
     else
-      render json: bet.errors, status: :unprocessable_entity
+      render json: pick.errors, status: :unprocessable_entity
     end
   end
 
@@ -16,7 +16,7 @@ class BetOptionPicksController < ApplicationController
     params.require(:bet_option_pick).permit(:bet_event_id, :bet_event_option_id)
   end
 
-  def load_bet_event
-    @bet_event = BetEvent.find(params['bet_event_id'])
+  def load_bet
+    @bet = Bet.find(params['bet_id'])
   end
 end
