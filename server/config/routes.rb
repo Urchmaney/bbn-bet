@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     
     resources :bets, only: [:create] do
       resources :bet_option_picks, only: [:create]
+      resources :report_bets, only: [:create]
     end
   end
 end
