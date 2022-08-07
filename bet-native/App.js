@@ -1,6 +1,9 @@
 import { StyleSheet, Image, Text, ScrollView, View, TouchableOpacity, FlatList } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons/faCaretDown'
+import { faCaretDown, width } from '@fortawesome/free-solid-svg-icons/faCaretDown';
+import { faHome } from '@fortawesome/free-solid-svg-icons/faHome';
+import { faBoxArchive } from '@fortawesome/free-solid-svg-icons/faBoxArchive'
+import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
 
 const DATA = [
   {
@@ -70,11 +73,12 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity style={styles.profile_container}>
-        <FontAwesomeIcon icon={ faCaretDown } style={styles.drop_down_icon} />
-        <Image style={styles.profile_img} source={require('./me.jpg')} />
-      </TouchableOpacity>
+    <View style={{ backgroundColor: '#eeeeee'}}>
+      <View style={styles.container}>
+        <TouchableOpacity style={styles.profile_container}>
+          <FontAwesomeIcon icon={ faCaretDown } style={styles.drop_down_icon} />
+          <Image style={styles.profile_img} source={require('./me.jpg')} />
+        </TouchableOpacity>
         <View>
           <FlatList
               style={styles.list_container}
@@ -86,9 +90,21 @@ export default function App() {
               showsVerticalScrollIndicator={false}
           />
         </View>
-        
-      
-      
+      </View>
+      <View style={styles.footer_container}>
+          <TouchableOpacity style={styles.footer_section}>
+            <FontAwesomeIcon icon={ faHome }  style={styles.footer_icon} />
+            <Text style={styles.footer_text}>Home</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.footer_section}>
+            <FontAwesomeIcon icon={ faBoxArchive }  style={styles.footer_icon}/>
+            <Text style={styles.footer_text}>Placed Bet</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.footer_create_container}>
+            <FontAwesomeIcon icon={faPlus} />
+          </TouchableOpacity>
+        </View>
     </View>
   )
 }
@@ -135,6 +151,40 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
+  }, 
+  footer_container: {
+    padding: 10,
+    position: 'absolute',
+    width: '100%',
+    height: 50,
+    bottom: 0,
+    flexDirection: 'row',
+    backgroundColor: '#638475',
+    zIndex: 2,
+    justifyContent: 'space-between'
+  },
+  footer_section: {
+    color: 'white',
+    width: 120,
+    textAlign: 'center',
+    alignItems: 'center',
+  },
+  footer_icon: {
+    color: 'white'
+  },
+  footer_text: {
+    color: 'white'
+  },
+  footer_create_container: {
+    position: 'absolute',
+    width: 50,
+    height: 50,
+    borderRadius: 30,
+    top: -20,
+left: 155,
+    backgroundColor: '#eeeeee',
+    alignItems:'center',
+    justifyContent: 'center',
   }
 });
 
