@@ -1,9 +1,12 @@
+import { useState } from 'react'
 import { StyleSheet, Image, Text, ScrollView, View, TouchableOpacity, FlatList } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCaretDown, width } from '@fortawesome/free-solid-svg-icons/faCaretDown';
 import { faHome } from '@fortawesome/free-solid-svg-icons/faHome';
 import { faBoxArchive } from '@fortawesome/free-solid-svg-icons/faBoxArchive'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
+import { faSliders } from '@fortawesome/free-solid-svg-icons/faSliders'
+import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons/faArrowRightFromBracket'
 
 const DATA = [
   {
@@ -66,6 +69,7 @@ const headerComp = () => (
 )
 
 export default function App() {
+  const [showMenu, setShowMenu] = useState(false);
   const renderItem = ({ item, index }) => {
     if (index == 0) return <Text style={styles.welcome_text}> Welcome Micheal </Text>
 
@@ -75,10 +79,21 @@ export default function App() {
   return (
     <View style={{ backgroundColor: '#eeeeee'}}>
       <View style={styles.container}>
-        <TouchableOpacity style={styles.profile_container}>
+        <TouchableOpacity style={styles.profile_container} onPress={() => setShowMenu(!showMenu)}>
           <FontAwesomeIcon icon={ faCaretDown } style={styles.drop_down_icon} />
           <Image style={styles.profile_img} source={require('./me.jpg')} />
         </TouchableOpacity>
+        { showMenu && <View style={styles.drop_down_menu}>
+          <View style={styles.menu_section}>
+            <FontAwesomeIcon icon={ faSliders } style={styles.menu_icon} />
+            <Text> Profile Settings</Text>
+          </View>
+
+          <View style={styles.menu_section}>
+            <FontAwesomeIcon icon={ faArrowRightFromBracket } style={styles.menu_icon} />
+            <Text>Log Out</Text>
+          </View>
+        </View> }
         <View>
           <FlatList
               style={styles.list_container}
@@ -128,6 +143,23 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
     zIndex: 10
+  },
+  drop_down_menu: {
+    position: 'absolute',
+    width: 150,
+    right: 0,
+    top: 35,
+    zIndex: 11,
+    padding: 10,
+    backgroundColor: 'white'
+  },
+  menu_icon: {
+    width: 15,
+    marginRight: 6
+  },
+  menu_section: {
+    flexDirection: 'row',
+    padding: 4
   },
   container: {
     padding: 20,
