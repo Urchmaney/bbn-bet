@@ -8,6 +8,8 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
 import { faSliders } from '@fortawesome/free-solid-svg-icons/faSliders'
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons/faArrowRightFromBracket'
 
+import FaIconTextRow from './src/components/molecules/FaIconTextRow';
+
 const DATA = [
   {
     id: 1,
@@ -83,17 +85,12 @@ export default function App() {
           <FontAwesomeIcon icon={ faCaretDown } style={styles.drop_down_icon} />
           <Image style={styles.profile_img} source={require('./me.jpg')} />
         </TouchableOpacity>
-        { showMenu && <View style={styles.drop_down_menu}>
-          <View style={styles.menu_section}>
-            <FontAwesomeIcon icon={ faSliders } style={styles.menu_icon} />
-            <Text> Profile Settings</Text>
+        {showMenu && 
+          <View style={styles.drop_down_menu}>
+            <FaIconTextRow text="Profile Settings" faIcon={faSliders} />
+            <FaIconTextRow text="Log Out" faIcon={faArrowRightFromBracket} />
           </View>
-
-          <View style={styles.menu_section}>
-            <FontAwesomeIcon icon={ faArrowRightFromBracket } style={styles.menu_icon} />
-            <Text>Log Out</Text>
-          </View>
-        </View> }
+        }
         <View>
           <FlatList
               style={styles.list_container}
@@ -152,14 +149,6 @@ const styles = StyleSheet.create({
     zIndex: 11,
     padding: 10,
     backgroundColor: 'white'
-  },
-  menu_icon: {
-    width: 15,
-    marginRight: 6
-  },
-  menu_section: {
-    flexDirection: 'row',
-    padding: 4
   },
   container: {
     padding: 20,
